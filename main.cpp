@@ -6,7 +6,7 @@ int main()
 {
     //Administradores
     int adminsLength = 3;
-    string admins[20] = {"Juan", "Cristian", "Samir"};
+    string admins[20] = {"JuanDi", "Cristian", "Samir"};
 
     //Planes
     int planesLength = 4;
