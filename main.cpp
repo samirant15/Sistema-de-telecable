@@ -5,12 +5,13 @@ using namespace std;
 string loginadmin;
 string loginadminpass;
 int session_logged = 0;
+int cl=4;
 
 //Administradores
 int adminsLength = 3;
 string admins[20] = {"JuanDi", "Cristian", "Samir"};
 string adminspass[20] = {"lolo123","cristian123", "samir123"};
-    
+
 //Planes
 int planesLength = 4;
 string Planes[10] = {"Sencillo", "Normal", "Bueno", "Premium"};
@@ -43,7 +44,7 @@ void logeo(){
     cout << "> Contraseña: ";
     cin >> loginadminpass;
 	int pos = BuscarAdministrador(loginadmin);
-	
+
 	if(loginadmin == admins[pos] && loginadminpass == adminspass[pos]){
 			session_logged = 1;
 	} else {
@@ -53,34 +54,70 @@ void logeo(){
 
 void logged(){
 	if(session_logged == 1){
+            char opcion;
+            do{
 		cout << "a. Agregar clientes." << endl;
 		cout << "b. Borrar Clientes." << endl;
 		cout << "c. Agregar mas cajitas" << endl;
 		cout << "d. Salir del Administrador" << endl;
-		
-		char opcion;
+
 		cin >> opcion;
 		switch(opcion){
-			case 'a':
+			case 'a':{
 				//Colocar Funcion de Agregar Clientes
+				cout << "Inserte el nombre del cliente" <<endl;
+				cl++;
+				cin >> clientes[cl];
+				cout <<endl;
+				for (int i=0; i<cl+1; i++){
+                    			cout << clientes[i]<< " , ";
+				}
+				cout <<endl;
+			}
 				break;
-			case 'b':
+			case 'b':{
 				//Colocar Funcion de Borrar Clientes
+				cout << "Inserte el nombre del cliente que desee borrar" <<endl;
+				string nombEl;
+				cin >> nombEl;
+				for (int i=0; i<cl+1; i++){
+                			if (nombEl == clientes[i]){
+                       				for(int j=i; j<cl; j++){
+                				 clientes[j] = clientes[j+1];
+                       		}
+                		 cl--;
+                	 }
+			}
+                		cout <<endl;
+				for (int i=0; i<cl+1; i++){
+                    			cout << clientes[i]<< " , ";
+				}
+				cout <<endl;
+				}
 				break;
-			case 'c':
+			case 'c':{
 				//Colocar Funcion de Agregar Mas Cajitas
+			}
 				break;
-			case 'd':
+			case 'd':{
 				//Salir del Administrador
 				session_logged = 0;
 				logeo();
+        		 }
 				break;
-			default: 
+			default:{
 				cout << "Error 404 -> Selecciona la opcion correctamente." << endl;
 				logged();
-				break;		
+				cout <<endl;
+				}
+				break;
+
 		}
-	}
+        }
+    while(opcion != 'd');
+
+        }
+
 }
 
 
@@ -88,4 +125,8 @@ int main()
 {
 	logeo();
 	logged();
+	cout <<endl;
+	cout << "Programa Cerrado"<<endl;
+	return 0;
+
 }
