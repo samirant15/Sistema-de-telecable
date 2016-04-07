@@ -8,7 +8,6 @@ string EscribirMensaje();
 string loginadmin;
 string loginadminpass;
 int session_logged = 0;
-int cl=4;
 string mensajes[20];
 int msjLength = 0;
 string logged;
@@ -26,8 +25,8 @@ int precioPorCaja[10] = {100, 150, 200, 300};
 int paqueteDeCanales[10] = {5, 10, 15, 20};
 
 //Clientes
-int clientesLength = 5;
-string clientes[50] = {"Pedro", "Jose", "Estephany", "Saul", "Anabel"};
+int clientesLength = 4;
+string clientes[50] = {"Pedro", "Jose", "Estephany", "Saul"};
 string cedula[50] = {"13520314789", "51234756932", "13604893265", "635586901275"}; //las cedulas tienen 11 numeros
 string planRegistrado[50] = {"Normal", "Bueno", "Premium", "Normal"};
 int cantCajas[50] = {2, 1, 3, 5};
@@ -91,7 +90,7 @@ void loggedAsAdmin(){
             cout << "-------------------Menu-----------------------" << endl;
             cout << "|a. Agregar clientes.                        |" << endl;
             cout << "|b. Borrar Clientes.                         |" << endl;
-            cout << "|c. Ver quejas/sugerencias.                  |" << endl;
+            cout << "|c. Ver quejas/sugerencias.                  |" << endl;http://www.torrenthound.com/hash/96c2ec880d443ddd42d7198d4721890ed97cf670/torrent-info/Wii-Sports-Resort-WBFS--RZTE01--NTSC--wiiGM
             cout << "|d. Salir del Administrador.                 |" << endl;
             cout << "----------------------------------------------" << endl;
             cout << "\nOpcion: ";
@@ -102,10 +101,10 @@ void loggedAsAdmin(){
                 case 'a':{
                     //Colocar Funcion de Agregar Clientes
                     cout << "Inserte el nombre del cliente" <<endl;
-                    cl++;
-                    cin >> clientes[cl];
+                    clientesLength++;
+                    cin >> clientes[clientesLength];
                     cout <<endl;
-                    for (int i=0; i<cl+1; i++){
+                    for (int i=0; i<clientesLength; i++){
                                     cout << clientes[i]<< " , ";
                     }
                     cout <<endl;
@@ -117,16 +116,16 @@ void loggedAsAdmin(){
                     cout << "Inserte el nombre del cliente que desee borrar" <<endl;
                     string nombEl;
                     cin >> nombEl;
-                    for (int i=0; i<cl+1; i++){
+                    for (int i=0; i<clientesLength; i++){
                                 if (nombEl == clientes[i]){
-                                        for(int j=i; j<cl; j++){
+                                        for(int j=i; j<clientesLength; j++){
                                             clientes[j] = clientes[j+1];
                                 }
-                             cl--;
+                             clientesLength--;
                          }
                 }
                             cout <<endl;
-                    for (int i=0; i<cl+1; i++){
+                    for (int i=0; i<clientesLength; i++){
                                     cout << clientes[i]<< " , ";
                     }
                     cout <<endl;
@@ -322,4 +321,3 @@ int main()
 {
 	Menu();
 }
-
