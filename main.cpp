@@ -220,7 +220,7 @@ void loggedAsCliente(){
             cout << "|*Cliente                                    |" << endl;
             cout << "-------------------Menu-----------------------" << endl;
             cout << "|a. Hacer una queja/sugerencia.              |" << endl;
-            cout << "|b. ----------                               |" << endl;
+            cout << "|b. Ver informacion y datos de sus  planes   |" << endl;
             cout << "|c. ----------                               |" << endl;
             cout << "|d. Salir de sesion                          |" << endl;
             cout << "----------------------------------------------" << endl;
@@ -231,10 +231,19 @@ void loggedAsCliente(){
                     mensajes[msjLength]=EscribirMensaje();
                     msjLength++;
                     break;
+
             case 'b':
-                    cout << "----\n";
-                    cout << "Mensaje #" << msjLength << endl;
-                    cout << mensajes[msjLength-1];
+                    cout << "Informacion de los clientes"<<endl;
+                    cout <<endl;
+                    for (int i=0; i< clientesLength; i++){
+                        if (logged== clientes[i]){
+                        cout << "Cliente: "<< clientes[i] << ", Cedula: " << cedula[i] << ", cantidad de cajas: "<< cantCajas[i] << ", y plan: " << Planes[i]<<endl;
+
+                        }
+
+
+                    }
+                    system("pause");
                     break;
 
             case 'd':{
