@@ -101,13 +101,39 @@ void loggedAsAdmin(){
                 case 'a':{
                     //Colocar Funcion de Agregar Clientes
                     cout << "Inserte el nombre del cliente" <<endl;
-                    clientesLength++;
                     cin >> clientes[clientesLength];
-                    cout <<endl;
-                    for (int i=0; i<clientesLength; i++){
-                                    cout << clientes[i]<< " , ";
+                    cout << endl;
+                    for (int i=0; i<clientesLength+1; i++){
+                    	cout << clientes[i] << endl;
                     }
-                    cout <<endl;
+                    //JuanDiego - AgregarCedulaDelCliente//
+                    cout << "Inserte la cedula del cliente" <<endl;
+                    cin >> cedula[clientesLength];
+                    cout << endl;
+					
+					for(int i=0; i<clientesLength+1; i++){
+                    	cout << clientes[i] << " - " << cedula[i] << endl;
+					}
+					
+					//Agregar Plan del Cliente
+					cout << "Inserte plan del cliente" <<endl;
+                    cin >> planRegistrado[clientesLength];
+                    cout << endl;
+					
+					for(int i=0; i<clientesLength+1; i++){
+                    	cout << clientes[i] << " - " << planRegistrado[i] << endl;
+					}
+					
+					//
+					//Agregar Cajitas del Cliente
+					cout << "Inserte cantidad de cajitas" <<endl;
+                    cin >> cantCajas[clientesLength];
+                    cout << endl;
+					
+					for(int i=0; i<clientesLength+1; i++){
+                    	cout << clientes[i] << " - " << cantCajas[i] << endl;
+					}
+                    cout << endl;
                 }
                     system("pause");
                     break;
