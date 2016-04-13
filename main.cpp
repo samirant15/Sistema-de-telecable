@@ -21,8 +21,8 @@ string adminspass[20] = {"lolo123","cristian123", "samir123"};
 int planesLength = 4;
 string Planes[10] = {"Sencillo", "Normal", "Bueno", "Premium"};
 int precioBase[10] = {200, 300, 500, 800};
-int precioPorCaja[10] = {100, 150, 200, 300};
 int paqueteDeCanales[10] = {5, 10, 15, 20};
+int precioPorCaja[10] = {100, 150, 200, 300};
 
 //Clientes
 int clientesLength = 4;
@@ -53,35 +53,23 @@ int BuscarCliente(string loginCliente){
 	}
 }
 
-string NumeroDeCedula(string cliente){
-	for(int i=0; i<clientesLength; i++){
-	    if(cliente == clientes[i]){
-	        return cedula[i];
-	    }
-	}
-}
-
-/*
 int CalcularMensualidad(string name)
 {
     int total, pBase,pCaja, pCanales;
     int pos;
     pos = BuscarCliente(name);
 
-    for(int i=0; i<clientesLength; i++){
-            if(i==pos){
-                pBase =
+    for(int i=0; i<planesLength; i++){
+            if(planRegistrado[pos]==Planes[i]){
+                pBase = precioBase[i];
+                pCaja = precioPorCaja[i];
+                pCanales = paqueteDeCanales[i]*100;
             }
     }
 
-
     total = pBase + (cantCajas[pos]*pCaja) + (pCanales);
-
-
-     int precioBase[10] = {200, 300, 500, 800};
-int precioPorCaja[10] = {100, 150, 200, 300};
-int paqueteDeCanales
-}*/
+    return total;
+}
 
 //Funcion Logueo
 void logeoAdmin(){
@@ -113,14 +101,18 @@ void loggedAsAdmin(){
             cout << "|a. Agregar clientes.                        |" << endl;
             cout << "|b. Borrar Clientes.                         |" << endl;
             cout << "|c. Ver quejas/sugerencias.                  |" << endl;
-            cout << "|d. Salir del Administrador.                 |" << endl;
+            cout << "|d. Agregar un plan.                         |" << endl;
+            cout << "|e. Modificar un plan.                       |" << endl;
+            cout << "|f. Salir del Administrador.                 |" << endl;
             cout << "----------------------------------------------" << endl;
             cout << "\nOpcion: ";
             cin >> opcion;
             string msj;
             char op;
+            string nombEl;
+            string plan="";
             switch(opcion){
-                case 'a':{
+                case 'a':
                     //Colocar Funcion de Agregar Clientes
                     cout << "Inserte el nombre del cliente" <<endl;
                     cin >> clientes[clientesLength];
@@ -139,12 +131,11 @@ void loggedAsAdmin(){
 
 
 					//Agregar Plan del Cliente
-					string plan="";
 					while(plan==""){
                         cout << "Inserte plan del cliente" <<endl;
                         cin >> plan;
                         cout << endl;
-                        for(int i=0; i<clientesLength; i++){
+                        for(int i=0; i<planesLength; i++){
                             if(Planes[i] == plan){
                                 planRegistrado[clientesLength]=plan;
                                 for(int j=0; j<clientesLength+1; j++){
@@ -152,7 +143,7 @@ void loggedAsAdmin(){
                                 }
                                 break;
                             }
-                            if(i==clientesLength-1)
+                            if(i==planesLength-1)
                                 plan="";
                         }
 					}
@@ -167,15 +158,17 @@ void loggedAsAdmin(){
 					for(int i=0; i<clientesLength+1; i++){
                     	cout << clientes[i] << " - " << cantCajas[i] << endl;
 					}
+                    cout << endl;
+
+					mensualidad[clientesLength] = CalcularMensualidad(clientes[clientesLength]);
+
 					clientesLength++;
                     cout << endl;
-                }
                     system("pause");
                     break;
-                case 'b':{
+                case 'b':
                     //Colocar Funcion de Borrar Clientes
                     cout << "Inserte el nombre del cliente que desee borrar" <<endl;
-                    string nombEl;
                     cin >> nombEl;
                     for (int i=0; i<clientesLength; i++){
                                 if (nombEl == clientes[i]){
@@ -184,6 +177,7 @@ void loggedAsAdmin(){
                                             cedula[j] = cedula[j+1];
                                             planRegistrado[j] = planRegistrado[j+1];
                                             cantCajas[j] = cantCajas[j+1];
+                                            mensualidad[j] = mensualidad[j+1];
                                 }
                              clientesLength--;
                          }
@@ -193,7 +187,6 @@ void loggedAsAdmin(){
                                     cout << clientes[i]<< " , ";
                     }
                     cout <<endl;
-                    }
                     system("pause");
                     break;
                 case 'c':
@@ -231,7 +224,71 @@ void loggedAsAdmin(){
                                 system("pause");
                             }
                         break;
+
                 case 'd':
+                    //Agregar un Plan
+                    cout << "Inserte el nombre del plan" <<endl;
+                    cin >> Planes[planesLength];
+                    cout << endl;
+
+                    cout << "Inserte el precio base del plan" <<endl;
+                    cin >> precioBase[planesLength];
+                    cout << endl;
+
+                    cout << "Inserte la cantidad de canales del plan" <<endl;
+                    cin >> paqueteDeCanales[planesLength];
+                    cout << endl;
+
+                    cout << "Inserte el precio por caja" <<endl;
+                    cin >> precioPorCaja[planesLength];
+                    cout << endl;
+
+                    planesLength++;
+
+                    for (int i=0; i<planesLength+1; i++){
+                    	cout << Planes[i] << endl;
+                    }
+                    system("pause");
+                    break;
+
+                case 'e':
+                    //Modificar un Plan
+                    cout << "Planes disponibles: ";
+                    for(int i=0; i<planesLength; i++){
+                        cout << Planes[i];
+                        if(i!=planesLength-1)
+                            cout << ", ";
+                        else
+                            cout << "." << endl;
+                    }
+
+                    plan="";
+                    while(plan==""){
+                        cout << "*Inserte el nombre del plan que desea modificar:" <<endl;
+                        cin >> plan;
+                        cout << endl;
+                        for(int i=0; i<planesLength; i++){
+                            if(Planes[i] == plan){
+                                    cout << "*Inserte el precio base:" <<endl;
+                                    cin >> precioBase[i];
+                                    cout << "*Inserte la cantidad de canales:" <<endl;
+                                    cin >> paqueteDeCanales[i];
+                                    cout << "*Inserte el precio por caja:" <<endl;
+                                    cin >> precioPorCaja[i];
+                                    cout << endl << "***Datos guardados exitosamente***\n*Nota: Las mensualidades de los usuarios cambiaran" << endl;
+                                    for(int i=0; i<clientesLength; i++){
+                                        mensualidad[i]=CalcularMensualidad(clientes[i]);
+                                    }
+                                    system("pause");
+                                    break;
+                                }
+                                if(i==planesLength-1)
+                                plan="";
+                            }
+
+                        }
+                    break;
+                case 'f':
                     //Salir del Administrador
                     session_logged = 0;
                     Menu();
@@ -245,7 +302,7 @@ void loggedAsAdmin(){
                     break;
                 }
             }
-    while(opcion != 'd');
+    while(opcion != 'f');
         }
 }
 
@@ -301,7 +358,11 @@ void loggedAsCliente(){
                     cout <<endl;
                     for (int i=0; i< clientesLength+1; i++){
                         if (logged== clientes[i]){
-                        cout << "*Cliente: "<< clientes[i] << "\n*Cedula: " << cedula[i] << "\n*Cantidad de cajas: "<< cantCajas[i] << "\n*Plan: " << planRegistrado[i]<<endl;
+                        cout << "*Cliente: "<< clientes[i] << endl;
+                        cout << "*Cedula: " << cedula[i] << endl;
+                        cout << "*Cantidad de cajas: " << cantCajas[i] << endl;
+                        cout << "*Plan: " << planRegistrado[i] << endl;
+                        cout << "*Mensualidad: " << mensualidad[i] << endl;
                         }
 
 
@@ -339,10 +400,13 @@ string EscribirMensaje()
     cout <<"----------------------------------------------------------------------\n";
     string temp = "", msj = "";
     int lines = 0;
+    int pos = BuscarCliente(logged);
     msj+= "*Escrito por:";
     msj+= logged;
     msj+= "\n*Cedula:";
-    msj+= NumeroDeCedula(logged);
+    msj+= cedula[pos];
+    msj+= "\n*Plan:";
+    msj+= planRegistrado[pos];
     msj+= "\n\n";
     while(lines<=20 && temp!="!"){
         getline(cin, temp);
@@ -391,5 +455,9 @@ void Menu()
 
 int main()
 {
+    for(int i=0; i<clientesLength; i++){
+        mensualidad[i]=CalcularMensualidad(clientes[i]);
+    }
+
 	Menu();
 }
