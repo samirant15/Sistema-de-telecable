@@ -61,6 +61,28 @@ string NumeroDeCedula(string cliente){
 	}
 }
 
+/*
+int CalcularMensualidad(string name)
+{
+    int total, pBase,pCaja, pCanales;
+    int pos;
+    pos = BuscarCliente(name);
+
+    for(int i=0; i<clientesLength; i++){
+            if(i==pos){
+                pBase =
+            }
+    }
+
+
+    total = pBase + (cantCajas[pos]*pCaja) + (pCanales);
+
+
+     int precioBase[10] = {200, 300, 500, 800};
+int precioPorCaja[10] = {100, 150, 200, 300};
+int paqueteDeCanales
+}*/
+
 //Funcion Logueo
 void logeoAdmin(){
 	string loginadmin;
@@ -86,11 +108,11 @@ void loggedAsAdmin(){
         do{
             system("cls");
             cout << "----------------------------------------------" << endl;
-            cout << "|*Administrador                              |" << endl;
-            cout << "-------------------Menu-----------------------" << endl;
+            cout << "|*Administrador                              |" << "   -----------------------------" << endl;
+            cout << "-------------------Menu-----------------------" << "   |Cant. de clientes: " << clientesLength << endl;
             cout << "|a. Agregar clientes.                        |" << endl;
             cout << "|b. Borrar Clientes.                         |" << endl;
-            cout << "|c. Ver quejas/sugerencias.                  |" << endl;http://www.torrenthound.com/hash/96c2ec880d443ddd42d7198d4721890ed97cf670/torrent-info/Wii-Sports-Resort-WBFS--RZTE01--NTSC--wiiGM
+            cout << "|c. Ver quejas/sugerencias.                  |" << endl;
             cout << "|d. Salir del Administrador.                 |" << endl;
             cout << "----------------------------------------------" << endl;
             cout << "\nOpcion: ";
@@ -110,29 +132,42 @@ void loggedAsAdmin(){
                     cout << "Inserte la cedula del cliente" <<endl;
                     cin >> cedula[clientesLength];
                     cout << endl;
-					
+
 					for(int i=0; i<clientesLength+1; i++){
                     	cout << clientes[i] << " - " << cedula[i] << endl;
 					}
-					
+
+
 					//Agregar Plan del Cliente
-					cout << "Inserte plan del cliente" <<endl;
-                    cin >> planRegistrado[clientesLength];
-                    cout << endl;
-					
-					for(int i=0; i<clientesLength+1; i++){
-                    	cout << clientes[i] << " - " << planRegistrado[i] << endl;
+					string plan="";
+					while(plan==""){
+                        cout << "Inserte plan del cliente" <<endl;
+                        cin >> plan;
+                        cout << endl;
+                        for(int i=0; i<clientesLength; i++){
+                            if(Planes[i] == plan){
+                                planRegistrado[clientesLength]=plan;
+                                for(int j=0; j<clientesLength+1; j++){
+                                    cout << clientes[j] << " - " << planRegistrado[j] << endl;
+                                }
+                                break;
+                            }
+                            if(i==clientesLength-1)
+                                plan="";
+                        }
 					}
-					
+
+
 					//
 					//Agregar Cajitas del Cliente
 					cout << "Inserte cantidad de cajitas" <<endl;
                     cin >> cantCajas[clientesLength];
                     cout << endl;
-					
+
 					for(int i=0; i<clientesLength+1; i++){
                     	cout << clientes[i] << " - " << cantCajas[i] << endl;
 					}
+					clientesLength++;
                     cout << endl;
                 }
                     system("pause");
@@ -146,6 +181,9 @@ void loggedAsAdmin(){
                                 if (nombEl == clientes[i]){
                                         for(int j=i; j<clientesLength; j++){
                                             clientes[j] = clientes[j+1];
+                                            cedula[j] = cedula[j+1];
+                                            planRegistrado[j] = planRegistrado[j+1];
+                                            cantCajas[j] = cantCajas[j+1];
                                 }
                              clientesLength--;
                          }
@@ -261,10 +299,9 @@ void loggedAsCliente(){
             case 'b':
                     cout << "Informacion de los clientes"<<endl;
                     cout <<endl;
-                    for (int i=0; i< clientesLength; i++){
+                    for (int i=0; i< clientesLength+1; i++){
                         if (logged== clientes[i]){
-                        cout << "Cliente: "<< clientes[i] << ", Cedula: " << cedula[i] << ", cantidad de cajas: "<< cantCajas[i] << ", y plan: " << Planes[i]<<endl;
-
+                        cout << "*Cliente: "<< clientes[i] << "\n*Cedula: " << cedula[i] << "\n*Cantidad de cajas: "<< cantCajas[i] << "\n*Plan: " << planRegistrado[i]<<endl;
                         }
 
 
