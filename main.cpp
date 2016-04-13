@@ -90,6 +90,14 @@ void logeoAdmin(){
 	}
 }
 
+int CalcularIngresos(){
+    int ingresos = 0;
+    for(int i=0; i<clientesLength; i++){
+        ingresos+=mensualidad[i];
+    }
+    return ingresos;
+}
+
 void loggedAsAdmin(){
 	if(session_logged == 1){
         char opcion;
@@ -97,10 +105,10 @@ void loggedAsAdmin(){
             system("cls");
             cout << "----------------------------------------------" << endl;
             cout << "|*Administrador                              |" << "   -----------------------------" << endl;
-            cout << "-------------------Menu-----------------------" << "   |Cant. de clientes: " << clientesLength << endl;
-            cout << "|a. Agregar clientes.                        |" << endl;
-            cout << "|b. Borrar Clientes.                         |" << endl;
-            cout << "|c. Ver quejas/sugerencias.                  |" << endl;
+            cout << "-------------------Menu-----------------------" << "   |Cant. de clientes: \t" << clientesLength << "    |" << endl;
+            cout << "|a. Agregar clientes.                        |" << "   |Mensajes:          \t" << msjLength << "    |" << endl;
+            cout << "|b. Borrar Clientes.                         |" << "   |Ingresos bruto:\t" << CalcularIngresos() << " |" << endl;
+            cout << "|c. Ver quejas/sugerencias.                  |" << "   -----------------------------" << endl;
             cout << "|d. Agregar un plan.                         |" << endl;
             cout << "|e. Modificar un plan.                       |" << endl;
             cout << "|f. Salir del Administrador.                 |" << endl;
