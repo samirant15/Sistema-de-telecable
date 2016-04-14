@@ -58,14 +58,16 @@ void loggedAsAdmin(){
             cout << "|c. Ver quejas/sugerencias.                  |" << "  -----------------------------" << endl;
             cout << "|d. Agregar un plan.                         |" << endl;
             cout << "|e. Modificar un plan.                       |" << endl;
-            cout << "|f. Tabla de informacion de clientes.        |" << endl;
-            cout << "|g. Salir del Administrador.                 |" << endl;
+            cout << "|f. Cambiar plan de un cliente.              |" << endl;
+            cout << "|g. Tabla de informacion de clientes.        |" << endl;
+            cout << "|h. Salir del Administrador.                 |" << endl;
             cout << "----------------------------------------------" << endl;
             cout << "\nOpcion: ";
             cin >> opcion;
             string msj;
             char op;
             string nombEl;
+            string name;
             string plan="";
             int pos;
             switch(opcion){
@@ -262,6 +264,14 @@ void loggedAsAdmin(){
                     break;
 
                 case 'f':
+                    cout << "----------------------------------------------" << endl;
+                    cout << "|*Cambiar plan de un cliente.                |" << endl;
+                    cout << "----------------------------------------------" << endl;
+                    cout << "*Ingrese el nombre de el cliente:" << endl;
+                    cin >> name;
+                    CambiarPlan(name, clientesLength, clientes, planesLength, planRegistrado, Planes, precioBase, precioPorCaja, paqueteDeCanales, cantCajas, mensualidad);
+                    break;
+                case 'g':
                     system("cls");
                     cout << "----------------------------------------------" << endl;
                     cout << "|*Tabla de informacion de clientes           |" << endl;
@@ -278,7 +288,7 @@ void loggedAsAdmin(){
                     system("pause");
                     break;
 
-                case 'g':
+                case 'h':
                     //Salir del Administrador
                     session_logged = 0;
                     Menu();
@@ -292,7 +302,7 @@ void loggedAsAdmin(){
                     break;
                 }
             }
-    while(opcion != 'g');
+    while(opcion != 'h');
         }
 }
 
@@ -302,6 +312,8 @@ string EscribirMensaje(string logged, int clientesLength, string clientes[], str
 
 //Funcion Logueo
 int logeoCliente(int clientesLength, string clientes[], int &session_logged, string &logged);
+
+void CambiarPlan(string name, int clientesLength, string clientes[], int planesLength, string planRegistrado[], string Planes[], int precioBase[], int precioPorCaja[], int paqueteDeCanales[], int cantCajas[], int mensualidad[]);
 
 void loggedAsCliente(){
 	if(session_logged == 2){
