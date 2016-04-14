@@ -42,7 +42,7 @@ int logeoAdmin(string admins[], string adminspass[], int adminsLength, int &sess
 	string loginadminpass;
 	cout << "> Nombre: ";
     cin >> loginadmin;
-    cout << "> Contraseña: ";
+    cout << "> ContraseÃ±a: ";
     cin >> loginadminpass;
 
     int pos = BuscarAdministrador(loginadmin, adminsLength, admins);
@@ -51,7 +51,7 @@ int logeoAdmin(string admins[], string adminspass[], int adminsLength, int &sess
 			logged = loginadmin;
 			return 1;
 	} else {
-		cout << endl << "ERROR: Su contraseña o nombre de usuario es incorrecto!" << endl << endl;
+		cout << endl << "ERROR: Su contraseÃ±a o nombre de usuario es incorrecto!" << endl << endl;
 		system("pause");
 		return 0;
 	}
@@ -125,5 +125,38 @@ string EscribirMensaje(string logged, int clientesLength, string clientes[], str
     return msj;
 }
 
+void CambiarPlan(string name, int clientesLength, string clientes[], int planesLength, string planRegistrado[], string Planes[], int precioBase[], int precioPorCaja[], int paqueteDeCanales[], int cantCajas[], int mensualidad[])
+{
+    int pos = BuscarCliente(name, clientesLength, clientes);
+    if(name == clientes[pos]){
+    string plan="";
+    while(plan==""){
+        cout << "*Ingrese el plan que desea:" <<endl;
+        cin >> plan;
+        cout << endl;
+        for(int i=0; i<planesLength; i++){
+            if(Planes[i] == plan){
+                planRegistrado[pos] = plan;
+                break;
+            }
+            if(i==planesLength-1){
+                plan="";
+                cout << "ERROR: Inserte un plan valido" << endl;
+                cout << "----------------------------------------------" << endl;
+                }
+            }
+        }
+        int cant;
+        cout << "*Ingrese la cantidad de cajitas:" << endl;
+        cin >> cant;
+        cantCajas[pos] = cant;
+        mensualidad[pos] = CalcularMensualidad(name, pos, planesLength, planRegistrado, Planes, precioBase, precioPorCaja, paqueteDeCanales, cantCajas);
+        cout << "***Datos guardados exitosamente***" << endl << endl;
+        system("pause");
+    }else{
+        cout << "ERROR: Cliente no encontrado." << endl << endl;
+        system("pause");
+    }
+}
 
 #endif // FUNCIONES_H_INCLUDED
